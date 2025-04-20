@@ -1,0 +1,7 @@
+*.lof
+*.synctex.gz
+*.log
+*.aux
+*.bbl
+*.lot
+/OLD_tex

@@ -1,2 +1,2 @@
-# Automation_of_coating_measurement_process
-bachelor_thesis
+# Automation_of_nuclear_material_cladding_coating_measurement_process
+Bachelor thesis
