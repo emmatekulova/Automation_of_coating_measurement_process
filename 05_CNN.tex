@@ -139,7 +139,6 @@ The first step involves either cropping or resizing the image to a size of $(n \
 Additional augmentations include:
 
 \begin{itemize}
-    \item \textbf{Resize:} This augmentation serves as an alternative to the initial cropping step. Instead of directly cropping to the predefined size, the image is first squeezed (rescaled) to include more contextual information within the frame. At the end of the augmentation process, it is cropped to the desired patch size. The goal of this augmentation is to provide the model with a broader understanding of the overall image context.
     \item \textbf{Brightness and contrast adjustment:}This simulates lighting variations.
     \item \textbf{Sharpening:} This enhances the details in the image.
     \item \textbf{Horizontal flipping:} The image is mirrored along the horizontal axis to reduce positional bias.
