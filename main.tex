@@ -4,6 +4,9 @@
 \geometry{left=25mm, right=25mm, top=25mm, bottom=25mm}
 \usepackage{setspace}
 \setstretch{1.5}
+\setlength{\parindent}{0pt}   % No indentation for paragraphs
+\setlength{\parskip}{1em}     % Add vertical space between paragraphs
+
 \usepackage{titlesec}
 \usepackage{tocloft}
 \usepackage{graphicx}
@@ -19,43 +22,39 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
 
-\title{Automation of nuclear material cladding coating measurement process }
-\author{Emma Tekulová }
+\title{Automation of nuclear material cladding coating measurement process}
+\author{Emma Tekulová}
 
+% Chapter formatting
 \titleformat{\chapter}[hang]{\bfseries\LARGE}{\thechapter.}{1em}{}
 \titleformat{\section}[hang]{\bfseries\Large}{\thesection}{1em}{}
 \titleformat{\subsection}[hang]{\bfseries\large}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}[hang]{\bfseries\normalsize}{\thesubsubsection}{1em}{}
 
-
+% Custom formatting for table of contents, figures, and tables
 \renewcommand{\cftchapfont}{\bfseries}
 \renewcommand{\cftsecfont}{\normalfont}
 \renewcommand{\cftchappagefont}{\bfseries}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
+% Remove unnecessary vertical space before sections
+\titleformat{\chapter}[hang]{\bfseries\LARGE}{\thechapter.}{1em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{\baselineskip}
 
-\usepackage{titlesec}
-
-\usepackage{titlesec}
-
-\titleformat{\chapter}[display]
-  {\normalfont\huge\bfseries} 
-  {}{0pt}{} 
-  \titlespacing*{\chapter}{0pt}{-1cm}{\baselineskip} % Adjust vertical space before the chapter title
-
+% Ensure content sections are aligned at the same height from top of the page
+\newcommand{\vskipbefore}{\vspace{-2cm}} % Adjust this for alignment
 
 \begin{document}
 
 \maketitle
 \newpage
 
-
+\vskipbefore % Adjust the space before contents section
 \include{00_summary}
 
 \renewcommand{\contentsname}{\vspace{-1.5cm}Contents}
 \addtocontents{toc}{\vspace{-1cm}}
 \tableofcontents
-
 
 \newpage
 
@@ -64,21 +63,25 @@
 
 \chapter{Practical Part}
 \input{02_data}
-\include{03_CNN}
-\include{04_integ_time}
-\include{05_SAM}
+\input{03_kmeans}
+\input{04_SAM}
+\input{05_CNN}
+\input{06_integ_time}
+\input{07_conclu}
 
 
-\include{06_conclu}
+
 \bibliographystyle{plain}
 \bibliography{CNN}
-
-
 \newpage
+\vskipbefore % Adjust the space before list of figures section
 \listoffigures
+
 \newpage
 
+\vskipbefore % Adjust the space before list of tables section
 \listoftables
+
 \newpage
 
 \chapter*{List of Abbreviations}
@@ -92,11 +95,14 @@
     \item \textbf{LRS} - Learning Rate Scheduler
     \item \textbf{SEM} - Scanning electron microscope
     \item \textbf{IoU} - Intersection over union
-    %\item \textbf{ROI} - Region of interest (here, measurement lines)
     \item \textbf{SAM} - Segment Anything Model
+    \item \textbf{HD} - Hausdorff Distance
+    
 \end{itemize}
 
-
-
-
 \end{document}
+
+
+
+
+

@@ -1,4 +1,4 @@
-\section{Integration of the Model}
+\section{Integration of the Model}\label{sec:integ}
 
 After training the model, it was crucial to integrate it smoothly into the existing workflow to avoid requiring the researcher to learn new software. The model was integrated into the Fiji software, which was already in use, instead of creating a new application.
 
@@ -6,7 +6,7 @@ The first step involved adding a new button to the Fiji interface, as shown in F
 
 By default, another set of ten lines is added beneath the first set. The resulting data, containing the twenty lines, are saved in a zip folder. The path to this zip folder is then returned, and Fiji opens the folder to display the predicted lines to the researcher. If the researcher is dissatisfied with the predictions, they can modify the lines as needed.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \centering
@@ -23,12 +23,11 @@ By default, another set of ten lines is added beneath the first set. The resulti
     \caption{Example workflow in Fiji}
     \label{fig:two-masks}
 \end{figure}
-\newpage
-\section{Results - Time Experiment}
+\section{Results - Time Experiment}\label{sec:res}
 
-Following the model integration and the update to the Fiji setup, a time measurement study was conducted to assess time savings. Eight images were selected from four batches, with two images chosen from each batch. The experiment was designed as follows:
+Following the model integration and the update to the Fiji setup, a time measurement study was conducted to assess time savings. Eight images were selected from four sets, with two images chosen from each set. The experiment was designed as follows:
 
-The first image in the set is measured manually, while the second is analyzed using the prediction model. In the first image from the first set, only the predefined default lines were used, simulating the first image in each batch where the researcher does not have lines similar to the coating. The first image from the second set used predefined lines from another image in the same batch. Since the images in each batch are similar, the researcher typically spends less time adjusting these lines. The third set followed the same approach as the second, but with an image where the model did not predict all the lines correctly. The fourth set included a challenging image with complex oxidation, where the model's predictions were less accurate, though the same approach as the second set was used on the first image.
+The first image in the set is measured manually, while the second is analyzed using the prediction model. In the first image from the first set, only the predefined default lines were used, simulating the first image in each set where the researcher does not have lines similar to the coating. The first image from the second set used predefined lines from another image in the same set. Since the images in each set are similar, the researcher typically spends less time adjusting these lines. The third set followed the same approach as the second, but with an image where the model did not predict all the lines correctly. The fourth set included a challenging image with complex oxidation, where the model's predictions were less accurate, though the same approach as the second set was used on the first image.
 
 The "Model" column in Table~\ref{tab:time-measurements} indicates whether the model was used for line prediction. The model was not used for the first image in each set but was used for the second image.
 
@@ -40,25 +39,31 @@ The "Add\_Excel" column reflects the time the researcher took from the start unt
 
 
 \begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Type}           & \textbf{Model} & \textbf{Predict} & \textbf{Measure} & \textbf{Add\_Excel} \\ \hline
-First Batch             & N             & /                & 01:12.00         & 01:30.00         \\ \hline
-First Batch             & Y             & 00:14.00         & 00:28.00         & 00:38.44         \\ \hline
-Normal                  & N             & /                & 00:57.32         & 01:26.00         \\ \hline
-Normal                  & Y             & 00:14.00         & 00:25.20         & 00:38.34         \\ \hline
-Model Wrong             & N             & /                & 01:09.00         & 01:32.00         \\ \hline
-Model Wrong             & Y             & 00:14.00         & 00:57.32         & 01:10.00         \\ \hline
-Hard Oxidation          & N             & /                & 01:05.00         & 01:26.00         \\ \hline
-Hard Oxidation          & Y             & 00:14.00         & 00:45.24         & 00:59.00         \\ \hline
-\end{tabular}
-\caption{Time measurement results for four sets of images. All times are in min:s:ms.}
-\label{tab:time-measurements}
-\end{table}
-\subsection{Time per one batch}
+    \centering
+    \caption{Time measurement results for four sets of images. All times are in min:s:ms.}
 
-A theoretical batch of 30 images was considered for this experiment. It was assumed that the first image in the batch would take the longest to process, as is explained in \ref{sec:ManualProc}. Additionally, two images were expected to experience significant model errors, while two others presented challenging oxidation conditions. The time spent on measurement with the model was approximated as:
+    \begin{tabular}{lllll}
+        \toprule
+        \textbf{Type} & \textbf{Model} & \textbf{Predict} & \textbf{Measure} & \textbf{Add\_Excel} \\
+        \midrule
+        First Batch    & N & /         & 01:12.00 & 01:30.00 \\
+        First Batch    & Y & 00:14.00  & 00:28.00 & 00:38.44 \\
+        Normal         & N & /         & 00:57.32 & 01:26.00 \\
+        Normal         & Y & 00:14.00  & 00:25.20 & 00:38.34 \\
+        Model Wrong    & N & /         & 01:09.00 & 01:32.00 \\
+        Model Wrong    & Y & 00:14.00  & 00:57.32 & 01:10.00 \\
+        Hard Oxidation & N & /         & 01:05.00 & 01:26.00 \\
+        Hard Oxidation & Y & 00:14.00  & 00:45.24 & 00:59.00 \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:time-measurements}
+\end{table}
+
+
+
+\subsection{Time per one set}
+
+A theoretical set of 30 images was considered for this experiment. It was assumed that the first image in the set would take the longest to process, as is explained in \ref{sec:ManualProc}. Additionally, two images were expected to experience significant model errors, while two others presented challenging oxidation conditions. The time spent on measurement with the model was approximated as:
 
 \[
 \text{Time with model} = 28 + (25 \times 25) + (57 \times 2) + (45 \times 2) = 857 \text{ seconds} = \frac{857}{60} \approx 14.28 \text{ minutes}.
@@ -66,65 +71,69 @@ A theoretical batch of 30 images was considered for this experiment. It was assu
 
 The results of the time calculations are summarized in Table \ref{tab:time_comparison}.
 
+
 \begin{table}[H]
     \centering
-    \renewcommand{\arraystretch}{1}
-    \begin{tabular}{|c|c|c|}
-        \hline
+    \caption{Comparison of time taken in different scenarios.}
+    
+    \begin{tabular}{lcc}
+        \toprule
         \textbf{Scenario} & \textbf{Time (seconds)} & \textbf{Time (minutes)} \\
-        \hline
-        Model - Measure & 857 & $\frac{857}{60} \approx 14.28$ \\
-        \hline
-        Manual - Measure & 1765 & $\frac{1765}{60} \approx 29.42$ \\
-        \hline
-        Model - Total & 2596 & $\frac{2596}{60} \approx 43.27$ \\
-        \hline
-        Manual - Total & 1246 & $\frac{1246}{60} \approx 20.77$ \\
-        \hline
+        \midrule
+        Model - Measure    & 857  & $\frac{857}{60} \approx 14.28$ \\
+        Manual - Measure   & 1765 & $\frac{1765}{60} \approx 29.42$ \\
+        Model - Total      & 2596 & $\frac{2596}{60} \approx 43.27$ \\
+        Manual - Total     & 1246 & $\frac{1246}{60} \approx 20.77$ \\
+        \bottomrule
     \end{tabular}
-    \caption{Comparison of time taken in different scenarios}
     \label{tab:time_comparison}
 \end{table}
 
+
+
 The percentage reductions in time are presented in Table \ref{tab:percentage_reduction}:
+
+
 
 \begin{table}[H]
     \centering
-    \renewcommand{\arraystretch}{1}
-    \begin{tabular}{|c|c|}
-        \hline
+    \caption{Percentage reduction in measurement and total time.}
+
+    \begin{tabular}{lc}
+        \toprule
         \textbf{Scenario} & \textbf{Percentage reduction} \\
-        \hline
+        \midrule
         Reduction in measurement time & $\frac{29.42 - 14.28}{29.42} \times 100 \approx 51.5\%$ \\
-        \hline
         Reduction in total time & $\frac{43.27 - 20.77}{43.27} \times 100 \approx 52.0\%$ \\
-        \hline
+        \bottomrule
     \end{tabular}
-    \caption{Percentage reduction in measurement and total time}
     \label{tab:percentage_reduction}
 \end{table}
 
+
 Thus, using the model results in significantly faster processing times for measurement and saving results. Although these measurements are approximations, the results clearly demonstrate that the model improves the speed of the process.
 
-\section{Results - Precision}
+\section{Results - Precision}\label{sec:resprec}
 
-After the model was integrated into the workflow, data were collected from the research process. A total of 90 images were analyzed using the model. For each image, two folders were generated: one containing the predicted lines and another for the lines that could be manually adjusted by the researcher. The results from three separate batches are summarized below.
+After the model was integrated into the workflow, data were collected from the research process. A total of 90 images were analyzed using the model. For each image, two folders were generated: one containing the predicted lines and another for the lines that could be manually adjusted by the researcher. The results from three separate sets are summarized below.
 
-The first and second batches showed high accuracy, requiring minimal manual adjustments. However, the third batch exhibited reduced performance. This decline was attributed to the introduction of different types of layers. Notably, the model also detected the white oxidation layer above the coating layer, as shown in Figure~\ref{fig:ox}. This layer is visually similar to other structural layers, as seen in Figure~\ref{fig:three-images} (right image).
+The first and second sets showed high accuracy, requiring minimal manual adjustments. However, the third set exhibited reduced performance. This decline was attributed to the introduction of different types of layers. Notably, the model also detected the white oxidation layer above the coating layer, as shown in Figure~\ref{fig:ox}. This layer is visually similar to other structural layers, as seen in Figure~\ref{fig:three-images} (bottom image).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{PICTURES/aa.png}
-    \caption{Image from the third batch, highlighting a poor prediction.}
+    \includegraphics[width=0.8\linewidth]{PICTURES/wrongPred.png}
+    \caption{Image from the third set, highlighting a poor prediction.}
     \label{fig:ox}
 \end{figure}
 
 These results suggest that the model performs well overall, requiring only minor adjustments in most of the cases. However, the findings also highlight the need to obtain a bigger dataset. The current dataset is still relatively small. These new data can be incorporated into the dataset using polygon labels, which can be efficiently created using automated scripts. After this, the model can be re-trained to make it more robust. This will create a feedback loop where labels can be generated faster, leading to a larger dataset, which in turn, after re-training, improves overall precision and results in time savings.
 
-The precision of the model's predictions was evaluated by counting the number of points that required manual adjustment after the predictions were made. Table~\ref{tab:results} presents the summary statistics for the three analyzed batches.
+The precision of the model's predictions was evaluated by counting the number of points that required manual adjustment after the predictions were made. Table~\ref{tab:results} presents the summary statistics for the three analyzed sets.
 
 \begin{table}[H]
     \centering
+    \caption{Analysis of model predictions across three sets.}
+
     \begin{tabular}{lcc}
         \toprule
         \textbf{Batch} & \textbf{Mean difference (pixel)}  & \textbf{Unchanged Points (\%)} \\
@@ -134,12 +143,11 @@ The precision of the model's predictions was evaluated by counting the number of
         3 & 5.58  & 22.7\% (136/600) \\
         \bottomrule
     \end{tabular}
-    \caption{Analysis of model predictions across three batches.}
     \label{tab:results}
 
 \end{table}
 
-As shown in Table~\ref{tab:results}, the first two batches display a high percentage of unchanged points, indicating that the model's predictions are highly accurate. In contrast, the third batch shows a significantly higher mean difference and a lower percentage of unchanged points. This highlights the need for additional data to improve the model's performance.
+As shown in Table~\ref{tab:results}, the first two sets display a high percentage of unchanged points, indicating that the model's predictions are highly accurate. In contrast, the third set shows a significantly higher mean difference and a lower percentage of unchanged points. This highlights the need for additional data to improve the model's performance.
 
 
 
