@@ -1,0 +1,115 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{geometry}
+\geometry{left=25mm, right=25mm, top=25mm, bottom=25mm}
+\usepackage{setspace}
+\setstretch{1.5}
+\setlength{\parindent}{0pt}   % No indentation for paragraphs
+\setlength{\parskip}{1em}     % Add vertical space between paragraphs
+
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\pagenumbering{gobble}
+\usetikzlibrary{shapes.geometric}
+
+\title{Automation of nuclear material cladding coating measurement process}
+\author{Emma Tekulová}
+
+% Chapter formatting
+\titleformat{\chapter}[hang]{\bfseries\LARGE}{\thechapter.}{1em}{}
+\titleformat{\section}[hang]{\bfseries\Large}{\thesection}{1em}{}
+\titleformat{\subsection}[hang]{\bfseries\large}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[hang]{\bfseries\normalsize}{\thesubsubsection}{1em}{}
+
+% Custom formatting for table of contents, figures, and tables
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\bfseries}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Remove unnecessary vertical space before sections
+\titleformat{\chapter}[hang]{\bfseries\LARGE}{\thechapter.}{1em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{\baselineskip}
+
+% Ensure content sections are aligned at the same height from top of the page
+\newcommand{\vskipbefore}{\vspace{-2cm}} % Adjust this for alignment
+
+\begin{document}
+
+\includepdf[pages = -]{bachelor-thesis2024tekulova-emma_entry-sheets_2.pdf}
+\newpage
+\thispagestyle{empty}
+\null
+\newpage
+\includepdf[pages = -]{1.pdf}
+\includepdf[pages = -]{2.pdf}
+
+\vskipbefore % Adjust the space before contents section
+\include{00_summary}
+
+\renewcommand{\contentsname}{\vspace{-1.5cm}Contents}
+\addtocontents{toc}{\vspace{-1cm}}
+\tableofcontents
+
+\newpage
+
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{01_intro}
+
+\chapter{Practical Part}
+\input{02_data}
+\input{03_kmeans}
+\input{04_SAM}
+\input{05_CNN}
+\input{06_integ_time}
+\input{07_conclu}
+
+
+
+\bibliographystyle{plain}
+\bibliography{CNN}
+\newpage
+%\vskipbefore % Adjust the space before list of figures section
+\listoffigures
+\newpage
+\listoftables
+
+%\newpage
+
+\chapter{List of Abbreviations}
+\begin{itemize}
+    \item \textbf{TP} - True Positive
+    \item \textbf{TN} - True Negative
+    \item \textbf{FP} - False Positive
+    \item \textbf{FN} - False Negative
+    \item \textbf{CNN} - Convolutional Neural Network
+    \item \textbf{LR} - Learning Rate
+    \item \textbf{LRS} - Learning Rate Scheduler
+    \item \textbf{SEM} - Scanning electron microscope
+    \item \textbf{IoU} - Intersection over union
+    \item \textbf{SAM} - Segment Anything Model
+    \item \textbf{HD} - Hausdorff Distance
+    
+\end{itemize}
+
+\end{document}
+
+
+
+
+
